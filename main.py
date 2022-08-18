@@ -23,7 +23,7 @@ time.sleep(2) #Wait
 win = gw.getWindowsWithTitle('Shadow of the Tomb Raider')[0]
 win.activate()
 
-time.sleep(1) #Wait
+time.sleep(2) #Wait
 
 pyautogui.press('enter') #Enter through launcher
 
