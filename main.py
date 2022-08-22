@@ -2,7 +2,7 @@ import os
 import subprocess
 import time
 import pyautogui
-
+import pygetwindow as gw
 import vgamepadfunc
 from vgamepadfunc import vg
 
@@ -21,8 +21,8 @@ time.sleep(2) #Wait
 
 
 #Focus on Window
-#win = gw.getWindowsWithTitle('Shadow of the Tomb Raider')
-#win.activate()
+win = gw.getWindowsWithTitle('Shadow of the Tomb Raider')[0]
+win.activate()
 
 #win32gui.SetForegroundWindow('Shadow of the Tomb Raider')
 
