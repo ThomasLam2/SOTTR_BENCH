@@ -2,8 +2,9 @@ import os
 import subprocess
 import time
 import pyautogui
-import pygetwindow as gw
-import vgamepad as vg
+
+import vgamepadfunc
+from vgamepadfunc import vg
 
 #Connect gamepad 360
 gamepad = vg.VX360Gamepad()
@@ -20,8 +21,10 @@ time.sleep(2) #Wait
 
 
 #Focus on Window
-win = gw.getWindowsWithTitle('Shadow of the Tomb Raider')[0]
-win.activate()
+#win = gw.getWindowsWithTitle('Shadow of the Tomb Raider')
+#win.activate()
+
+#win32gui.SetForegroundWindow('Shadow of the Tomb Raider')
 
 time.sleep(2) #Wait
 
@@ -29,44 +32,31 @@ pyautogui.press('enter') #Enter through launcher
 
 #Game Should now be ON
 
-time.sleep(10)#Wait
+time.sleep(15)#Wait
 
-def pressdown(times):
-    time.sleep(0.5)
-    for i in range(times):
-        gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
-        gamepad.update()
-        time.sleep(0.2)
-        gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
-        gamepad.update()
-        time.sleep(0.2)
-
-def pressa():
-    time.sleep(0.5)
-    gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
-    gamepad.update()
-    time.sleep(0.1)
-    gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
-    gamepad.update()
-
-def pressstart():
-    time.sleep(0.5)
-    gamepad.press_button(button=vg.XUSB_BUTTON(0x0010))
-    gamepad.update()
-    time.sleep(0.1)
-    gamepad.release_button(button=vg.XUSB_BUTTON(0x0010))
-    gamepad.update()
 
 #Go to Options
-pressdown(4)
-pressa()
+vgamepadfunc.pressdown(5)
+vgamepadfunc.pressa()
 #Go to Display and Graphics
-pressdown(3)
-pressa()
+vgamepadfunc.pressdown(3)
+vgamepadfunc.pressa()
 #Start Benchmark
-pressstart()
+vgamepadfunc.pressstart()
 
-time.sleep(20)
+#start presentmon
+os.chdir(r"C:\Users\thomalam\Documents\PRESENTMON")
+subprocess.Popen("SOTTR_Presentmon.bat") #Start Presentmon
+
+#Benchmark Should be Running
+time.sleep(60)
+
+#Turn off Application
+print("Shutting off Application ")
+subprocess.call(["taskkill","/F","/IM","SOTTR.exe"])
+
+
+
 
 
 
