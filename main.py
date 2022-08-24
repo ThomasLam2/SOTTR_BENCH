@@ -2,9 +2,12 @@ import os
 import subprocess
 import time
 import pyautogui
-import pygetwindow as gw
+
 import vgamepadfunc
 from vgamepadfunc import vg
+
+from pywinauto import Application
+from pywinauto import findwindows
 
 #Connect gamepad 360
 gamepad = vg.VX360Gamepad()
@@ -20,13 +23,19 @@ subprocess.Popen("SOTTR.exe") #Open the game
 time.sleep(2) #Wait
 
 
-#Focus on Window
-win = gw.getWindowsWithTitle('Shadow of the Tomb Raider')[0]
-win.activate()
+
 
 #win32gui.SetForegroundWindow('Shadow of the Tomb Raider')
 
 time.sleep(2) #Wait
+
+#Starting the app
+app = Application(backend="uia")
+#app.start(r"C:/Program Files/Microsoft Office/root/Office16/EXCEL.exe")
+app.connect(path=r"C:\Program Files (x86)\Steam\steamapps\common\Shadow of the Tomb Raider")
+
+#Focus on Window
+win = app.window(title_re='.*Shadow of the Tomb Raider')
 
 pyautogui.press('enter') #Enter through launcher
 
